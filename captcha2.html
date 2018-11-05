@@ -1,0 +1,59 @@
+<html>
+    <head>
+        <title>Captcha</title>
+    
+        <script type="text/javascript">
+
+       //Created / Generates the captcha function    
+        function randomString()  {
+
+            var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz!@#$%^&*";
+            var string_length = 6;
+            var randomstring = "";
+            for (var i=0; i<string_length; i++) {
+                var rnum = Math.floor(Math.random() * chars.length);
+                randomstring += chars.substring(rnum,rnum+1);
+            }
+            document.randform.randomfield.value = randomstring;
+        };
+
+        // Validate the Entered input aganist the generated security code function   
+        function ValidCaptcha(){
+            var str1 = removeSpaces(document.getElementById('txtCaptcha').value);
+            var str2 = removeSpaces(document.getElementById('txtInput').value);
+            if (str1 == str2) return true;        
+            return false;
+            
+        }
+
+        // Remove the spaces from the entered and generated code
+        function removeSpaces(string)
+        {
+            return string.split(' ').join('');
+        }
+        
+     
+        </script>
+    
+    
+    
+    </head>
+    <body onload="randomString();">
+
+        <form name="randform">
+            <input type="text" name="randomfield" value="" id="txtCaptcha" 
+                style="text-align: center;
+                border: none;
+                background: #eee;
+                width: 150px;
+                height: 80px;
+                font-size: 24px;
+                font-family: cursive;">
+            <input type="button" value="Create Random String" onclick="randomString();">
+        </form>
+
+        <input type="text" id="txtInput"/>    
+
+        <input id="Button1" type="button" value="Check" onclick="alert(ValidCaptcha());"/>
+    </body>
+</html>
